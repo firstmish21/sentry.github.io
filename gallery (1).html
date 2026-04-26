@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!-- // HTML5 документ. -->
+
+<html lang="he" dir="rtl">
+<!-- // Язык: иврит (he), направление RTL (справа налево) для правильной верстки. -->
+
+<head>
+<!-- // Head: мета, заголовок, Bootstrap, стили страницы. -->
+
+  <meta charset="UTF-8" />
+  <!-- // UTF-8 кодировка — иврит/символы не ломаются. -->
+
+  <title>Sentramind — גלריה</title>
+  <!-- // Заголовок вкладки: “Sentramind — Галерея”. -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- // Адаптивность для телефонов. -->
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- // Bootstrap CSS: сетка (row/col), navbar, кнопки, формы, отступы. -->
+
+  <style>
+    /* // Встроенный CSS: тема/палитра и стили галереи. */
+    /* Задаем фиксированную высоту для контейнера картинки */
+    img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+.gallery-img-wrap {
+    width: 100%;
+    height: 250px; /* Можешь изменить это значение под свой вкус */
+    overflow: hidden; /* Обрезаем всё, что выходит за рамки */
+    border-radius: 8px; /* Если хочешь скругленные углы, как на скриншоте */
+}
+
+/* Настраиваем саму картинку внутри */
+.gallery-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Это "магия": картинка заполняет блок, лишнее обрезается без искажений */
+    object-position: center; /* Центрируем изображение */
+    display: block;
+}
+
+    :root {
+      /* // CSS-переменные проекта (бренд). */
+      --sentra-bg: #020617;                 /* // основной фон */
+      --sentra-card: #020617;               /* // базовый цвет карточек (не основной, т.к. у карточки градиент) */
+      --sentra-soft: #02081a;               /* // мягкий фон */
+      --sentra-accent: #22c55e;             /* // зелёный акцент */
+      --sentra-accent-soft: rgba(34, 197, 94, 0.4); /* // мягкий зелёный */
+      --sentra-text-main: #e5f4ff;          /* // основной текст */
+      --sentra-text-muted: #94a3b8;         /* // приглушённый текст */
+    }
+
+    * {
+      box-sizing: border-box;              /* // удобная модель размеров */
+      margin: 0;                           /* // обнуляем отступы по умолчанию */
+      padding: 0;                          /* // обнуляем padding */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      /* // единый шрифт для всей страницы */
+    }
+
+    body {
+      min-height: 100vh;                   /* // высота минимум = экран */
+      background:
+        radial-gradient(circle at top, #0b1220, #020617 60%, #000 100%);
+      /* // фирменный тёмный фон */
+      color: var(--sentra-text-main);      /* // цвет текста по умолчанию */
+    }
+
+    .navbar {
+      backdrop-filter: blur(10px);         /* // эффект “стекла” */
+      background: rgba(2, 6, 23, 0.92) !important;
+      /* // фон навбара (перебивает bootstrap) */
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      /* // линия снизу */
+    }
+
+    .navbar-brand span {
+      letter-spacing: 0.18em;              /* // разрядка букв */
+      font-size: 0.8rem;                   /* // размер текста бренда */
+    }
+
+    main {
+      padding-top: 80px;                   /* // чтобы контент не залез под fixed navbar */
+      padding-bottom: 40px;                /* // отступ снизу */
+    }
+
+    .sentra-card {
+      background: radial-gradient(circle at top, #020617, #000814);
+      /* // фон карточки */
+      border-radius: 20px;                 /* // скругление */
+      padding: 20px 22px 24px;             /* // внутренние отступы */
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      /* // рамка */
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.95);
+      /* // тень */
+    }
+
+    .page-title {
+      letter-spacing: 0.18em;              /* // разрядка заголовка */
+      text-indent: 0.18em;                 /* // компенсация разрядки, чтобы центр был приятнее */
+      font-size: 1.1rem;                   /* // размер */
+      margin-bottom: 6px;                  /* // отступ снизу */
+    }
+
+    .page-sub {
+      font-size: 0.85rem;                  /* // размер подзаголовка */
+      color: var(--sentra-text-muted);     /* // приглушённый цвет */
+    }
+
+    .gallery-img-wrap {
+      border-radius: 16px;                 /* // скругление контейнера картинки */
+      overflow: hidden;                    /* // обрезаем края картинки по радиусу */
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      /* // рамка */
+      background: #020617;                 /* // фон под картинкой */
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.85);
+      /* // тень */
+    }
+
+    .gallery-img-wrap img {
+      width: 100%;                         /* // растянуть по ширине контейнера */
+      height: 100%;                        /* // растянуть по высоте контейнера */
+      object-fit: cover;                   /* // обрезать, но сохранить пропорции */
+      display: block;                      /* // убрать “лишние” нижние пробелы у img */
+    }
+
+    .gallery-caption {
+      font-size: 0.8rem;                   /* // размер подписи */
+      color: var(--sentra-text-muted);     /* // приглушённый цвет */
+      margin-top: 4px;                     /* // отступ сверху */
+      text-align: center;                  /* // центр */
+    }
+
+    .sketchfab-note {
+      font-size: 0.75rem;                  /* // мелкий текст */
+      color: var(--sentra-text-muted);     /* // приглушённый */
+    }
+  </style>
+</head>
+
+<body>
+<!-- // Тело страницы галереи. -->
+
+  <!-- NAVBAR (как в radar.html, только активная вкладка другая) -->
+  <!-- // Навигационное меню сверху. -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!-- // Bootstrap navbar:
+       // navbar-expand-lg — на телефоне будет “бургер”
+       // navbar-dark — светлый текст
+       // fixed-top — закреплён сверху -->
+
+    <div class="container">
+    <!-- // Bootstrap container для ровных отступов. -->
+
+      <a class="navbar-brand d-flex align-items-center" href="radar.html">
+      <!-- // Бренд/логотип. Ссылка сейчас ведёт на radar.html (можно на home/index по желанию). -->
+
+        <img src="orolmini.png" class="me-2" style="height:34px" />
+        <!-- // Маленькое лого в навбаре. -->
+
+        <span class="fw-semibold">SENTRAMIND</span>
+        <!-- // Текст бренда. -->
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <!-- // Кнопка “бургер”:
+           // data-bs-target="#nav" привязано к div id="nav" ниже. -->
+
+        <span class="navbar-toggler-icon"></span>
+        <!-- // Иконка бургера Bootstrap. -->
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+      <!-- // Сворачиваемая часть навбара. -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- // Список пунктов меню.
+             // ms-auto — сдвигает меню (в rtl это может визуально вести себя иначе, но обычно ок). -->
+
+           <li class="nav-item">
+    <a class="nav-link" href="index.html">דף הבית</a>
+  </li>
+          <!-- // Пункт “Главная”. -->
+
+          <li class="nav-item"><a class="nav-link" href="radar.html">רדאר</a></li>
+          <!-- // Пункт “Радар”. -->
+
+          <li class="nav-item"><a class="nav-link" href="contact.html">יצירת קשר</a></li>
+          <!-- // Пункт “Контакты”. -->
+
+          <li class="nav-item"><a class="nav-link active" href="gallery.html">גלריה</a></li>
+          <!-- // Текущая страница “Галерея” — active подсвечивает пункт. -->
+
+          <li class="nav-item"><a class="nav-link" href="document.html">דוקומנטציה</a></li>
+          <!-- // Пункт “Документация” (проверить, что document.html реально существует). -->
+
+          <li class="nav-item"><a class="nav-link" href="about.html">על הפרויקט</a></li>
+          <!-- // Пункт “О проекте”. -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+  <!-- // Основной контент страницы. -->
+
+    <div class="container">
+    <!-- // Bootstrap container для контента. -->
+
+      <!-- Заголовок -->
+      <div class="sentra-card mb-4">
+      <!-- // Карточка с заголовком страницы. mb-4 = отступ снизу. -->
+
+        <h1 class="page-title">גלריה</h1>
+        <!-- // Заголовок “Галерея”. -->
+
+        <p class="page-sub">
+          כאן מוצגות תמונות ו־3D מודל של הטורֶלָה.  
+          שלוש התמונות העליונות — מהאינטרנט / מהבדיקות שלך,  
+          ומתחת — מודל Sentry מ־Team Fortress 2 ב־3D.
+        </p>
+        <!-- // Подзаголовок-описание (иврит).
+             // Два пробела перед переносом строки “  ” — это HTML трюк для принудительного <br> в markdown, но в HTML это просто пробелы.
+             // Если хочешь гарантированный перенос — лучше использовать <br>. -->
+      </div>
+
+      <!-- 3 ФОТО -->
+      <div class="row g-3 mb-4">
+      <!-- // Bootstrap сетка:
+           // row = строка,
+           // g-3 = gap между колонками,
+           // mb-4 = отступ снизу. -->
+
+        <div class="col-md-4">
+        <!-- // Колонка 1: на md и выше 1/3 ширины. На мобиле будет в столбик. -->
+
+          <div class="gallery-img-wrap">
+          <!-- // Контейнер картинки (рамка, тень, скругление). -->
+
+            <!-- TODO: поставь сюда ИМЯ ПЕРВОЙ фотки -->
+            <!-- // Комментарий для тебя: можно заменить src на локальный файл: images/photo1.jpg -->
+
+            <img src="https://miro.medium.com/v2/resize:fit:1400/1*IAX4XJarvQujscQkD-i9ig.jpeg" alt="Sentramind turret photo 1" />
+            <!-- // Картинка №1:
+                 // src = ссылка на внешний URL
+                 // alt = текст на случай, если картинка не загрузилась + доступность -->
+          </div>
+
+          <div class="gallery-caption">תמונה 1 — הטורֶלָה בפעולה</div>
+          <!-- // Подпись под картинкой. -->
+        </div>
+
+        <div class="col-md-4">
+        <!-- // Колонка 2. -->
+
+          <div class="gallery-img-wrap">
+            <!-- TODO: поставь сюда ИМЯ ВТОРОЙ фотки -->
+            <!-- // Тут у тебя base64 (data:image/jpeg;base64,...).
+                 // Это встроенная картинка прямо в HTML (может сильно утяжелять файл). -->
+
+            <img src="data:image/jpeg;base64,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" alt="Sentramind turret photo 2" />
+            <!-- // Фото №2, встроено прямо в HTML.
+                 // Плюс: работает оффлайн.
+                 // Минус: файл HTML становится огромный и тяжёлый. -->
+          </div>
+
+          <div class="gallery-caption">תמונה 2 — מבט צד</div>
+          <!-- // Подпись фото №2. -->
+           <img src="23523523fsfsfss.webp" alt="">
+        </div>
+
+        <div class="col-md-4">
+        <!-- // Колонка 3. -->
+
+          <div class="gallery-img-wrap">
+            <!-- TODO: поставь сюда ИМЯ ТРЕТЬЕЙ фотки -->
+            <!-- // Тоже base64 (data:image/jpeg;base64,...). -->
+
+            <img src="data:image/jpeg;base64,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" alt="Sentramind turret photo 3" />
+            <!-- // Фото №3, тоже base64 внутри HTML (увеличивает размер страницы). -->
+          </div>
+
+          <div class="gallery-caption">תמונה 3 — בדיקות בשטח / מעבדה</div>
+          <!-- // Подпись фото №3. -->
+        </div>
+      </div>
+
+      <!-- 3D МОДЕЛЬ TF2 SENTRY -->
+      <div class="sentra-card">
+      <!-- // Отдельная карточка под 3D модель. -->
+
+        <h2 class="h6 mb-3">3D מודל — Team Fortress 2 Sentry</h2>
+        <!-- // Заголовок. h6 = Bootstrap размер. -->
+
+        <div class="ratio ratio-16x9 mb-2">
+        <!-- // Bootstrap ratio: делает адаптивный контейнер 16:9 для iframe. -->
+
+          <!-- Встраивание модели из Sketchfab -->
+          <!-- // Встраиваем модель Sketchfab через iframe. -->
+
+          <iframe
+            title="TF2 Sentry Turret"
+           
+
+            frameborder="0"
+            
+
+            allowfullscreen
+            
+
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"
+            
+
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            
+
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share
+            
+
+            src="https://sketchfab.com/models/7ccc8e8a45534dc2804fd594adbd5348/embed"
+           
+          >
+          </iframe>
+        </div>
+
+        <p class="sketchfab-note mb-0">
+          מודל 3D של Sentry מ־Team Fortress 2 (דרך Sketchfab). אפשר לסובב עם העכבר,
+          לזום פנימה ולהשתמש בו כהמחשה ויזואלית לטורֶלָה שלך.
+        </p>
+        <!-- // Пояснение под моделью (стиль .sketchfab-note). -->
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- // Bootstrap JS bundle: нужен для navbar-toggler (collapse) и других компонентов. -->
+</body>
+</html>

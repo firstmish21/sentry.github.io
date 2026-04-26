@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!-- // HTML5 документ. -->
+
+<html lang="he" dir="rtl">
+<!-- // Язык: иврит. Направление: RTL (справа-налево). -->
+
+<head>
+<!-- // Head: мета-информация, Bootstrap, стили страницы. -->
+
+  <meta charset="UTF-8" />
+  <!-- // Кодировка UTF-8 — чтобы иврит/символы работали правильно. -->
+
+  <title>Sentramind — יצירת קשר</title>
+  <!-- // Заголовок вкладки браузера: “Sentramind — Контакты”. -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- // Адаптивность на телефоне. -->
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- // Подключаем Bootstrap CSS (navbar, сетка, кнопки, формы). -->
+
+  <style>
+    /* // Встроенный CSS только для этой страницы contact.html */
+
+    :root {
+      /* // CSS-переменные темы */
+      --sentra-bg: #020617;           /* // основной фон (тёмный) */
+      --sentra-text-main: #e5f4ff;    /* // основной цвет текста */
+      --sentra-text-muted: #94a3b8;   /* // приглушённый цвет */
+    }
+
+    * {
+      box-sizing: border-box;         /* // удобные размеры: padding входит в ширину */
+      margin: 0;                      /* // убрать стандартные отступы */
+      padding: 0;                     /* // убрать стандартные отступы */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      /* // общий системный шрифт */
+    }
+
+    body {
+      min-height: 100vh;              /* // минимум высота = высота экрана */
+      background:
+        radial-gradient(circle at top, #0b1220, #020617 60%, #000 100%);
+      /* // фирменный фон-градиент */
+      color: var(--sentra-text-main); /* // цвет текста по умолчанию */
+    }
+
+    .navbar {
+      backdrop-filter: blur(10px);    /* // стеклянный эффект */
+      background: rgba(2, 6, 23, 0.92) !important;
+      /* // фон nav (перебивает Bootstrap из-за !important) */
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      /* // тонкая линия снизу */
+    }
+
+    .navbar-brand span {
+      letter-spacing: 0.18em;         /* // разрядка букв логотипа */
+      font-size: 0.8rem;              /* // размер текста логотипа */
+    }
+
+    main {
+      padding-top: 80px;              /* // отступ сверху, чтобы контент не залез под fixed navbar */
+      padding-bottom: 40px;           /* // отступ снизу */
+    }
+
+    .sentra-card {
+      background: radial-gradient(circle at top, #020617, #000814);
+      /* // фон карточки */
+      border-radius: 20px;            /* // скругление углов */
+      padding: 20px 22px 24px;        /* // внутренние отступы */
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      /* // рамка */
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.95);
+      /* // тень */
+    }
+
+    .page-title {
+      letter-spacing: 0.18em;         /* // разрядка заголовка */
+      text-indent: 0.18em;            /* // “компенсация” разрядки */
+      font-size: 1.1rem;              /* // размер */
+      margin-bottom: 6px;             /* // отступ снизу */
+    }
+
+    .page-sub {
+      font-size: 0.85rem;             /* // размер подписи */
+      color: var(--sentra-text-muted);/* // приглушённый цвет */
+    }
+
+    .sentra-status {
+      min-height: 1.2em;              /* // чтобы место под статус не прыгало по высоте */
+      margin-top: 10px;               /* // отступ сверху */
+      font-size: 0.85rem;             /* // размер текста статуса */
+      color: var(--sentra-text-muted);/* // базовый цвет */
+    }
+    .sentra-status.ok { color: #4ade80; }
+    /* // Зеленый статус (успех) */
+    .sentra-status.bad { color: #f97373; }
+    /* // Красный статус (ошибка) */
+  </style>
+</head>
+
+<body>
+<!-- // Тело страницы contact.html -->
+
+  <!-- NAVBAR -->
+  <!-- // Верхнее меню (как на других страницах) -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!-- // navbar-expand-lg: на маленьких экранах меню свернется
+       // navbar-dark: светлая тема текста
+       // fixed-top: закреплено сверху -->
+
+    <div class="container">
+    <!-- // Bootstrap контейнер -->
+
+      <a class="navbar-brand d-flex align-items-center" href="radar.html">
+      <!-- // Лого-ссылка ведет на radar.html -->
+
+        <img src="orolmini.png" class="me-2" style="height:34px" />
+        <!-- // Мини-лого. me-2 = отступ справа/слева (margin-end) -->
+
+        <span class="fw-semibold">SENTRAMIND</span>
+        <!-- // Текст бренда. fw-semibold = полужирный -->
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <!-- // Бургер-кнопка:
+           // data-bs-target="#nav" связывается с блоком id="nav" -->
+
+        <span class="navbar-toggler-icon"></span>
+        <!-- // Иконка бургера Bootstrap -->
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+      <!-- // Схлопываемый блок меню -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- // Список ссылок. ms-auto = прижимает к краю -->
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">דף הבית</a>
+          </li>
+          <!-- // Ссылка: главная -->
+
+          <li class="nav-item"><a class="nav-link" href="radar.html">רדאר</a></li>
+          <!-- // Ссылка: радар -->
+
+          <li class="nav-item"><a class="nav-link active" href="contact.html">יצירת קשר</a></li>
+          <!-- // Ссылка: контакты (active — текущая страница) -->
+
+          <li class="nav-item"><a class="nav-link" href="gallery.html">גלריה</a></li>
+          <!-- // Ссылка: галерея -->
+
+          <li class="nav-item"><a class="nav-link" href="document.html">דוקומנטציה</a></li>
+          <!-- // Ссылка: документация -->
+
+          <li class="nav-item"><a class="nav-link" href="about.html">על הפרויקט</a></li>
+          <!-- // Ссылка: о проекте -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+  <!-- // Основной контент страницы -->
+
+    <div class="container">
+    <!-- // Контейнер Bootstrap -->
+
+      <div class="row g-4">
+      <!-- // Сетка Bootstrap: row, g-4 = расстояние между колонками -->
+
+        <div class="col-lg-6">
+        <!-- // Левая колонка (на больших экранах половина ширины) -->
+
+          <div class="sentra-card mb-3">
+          <!-- // Карточка формы, mb-3 = отступ снизу -->
+
+            <h1 class="page-title">יצירת קשר</h1>
+            <!-- // Заголовок “Связаться” -->
+
+            <p class="page-sub">
+              כאן אפשר להשאיר הודעה למפתח המערכת Sentramind Turret.
+              ההודעה נשמרת ב־Firebase Realtime Database.
+            </p>
+            <!-- // Описание: сообщения сохраняются в Firebase RTDB -->
+
+            <!-- FORM -->
+            <!-- // Форма отправки сообщения -->
+
+            <form class="mt-3" id="contactForm">
+            <!-- // mt-3 = отступ сверху, id нужен для JS обработчика submit -->
+
+              <div class="mb-3 text-end">
+              <!-- // mb-3 = отступ снизу, text-end = выравнивание текста вправо -->
+
+                <label class="form-label">שם</label>
+                <!-- // Лейбл поля “Имя” -->
+
+                <input id="contactName" type="text" class="form-control bg-dark text-light border-secondary" required />
+                <!-- // Поле ввода имени.
+                     // id="contactName" используется в JS.
+                     // form-control = Bootstrap стиль.
+                     // bg-dark/text-light/border-secondary = ручные цвета.
+                     // required = нельзя отправить пустым. -->
+              </div>
+
+              <div class="mb-3 text-end">
+                <label class="form-label">אימייל</label>
+                <!-- // Лейбл “Email” -->
+
+                <input id="contactEmail" type="email" class="form-control bg-dark text-light border-secondary" required />
+                <!-- // Поле email.
+                     // type="email" включает базовую валидацию email в браузере.
+                     // id="contactEmail" используется в JS. -->
+              </div>
+
+              <div class="mb-3 text-end">
+                <label class="form-label">הודעה</label>
+                <!-- // Лейбл “Сообщение” -->
+
+                <textarea id="contactMessage" rows="4" class="form-control bg-dark text-light border-secondary" required></textarea>
+                <!-- // Поле сообщения.
+                     // rows="4" задает высоту.
+                     // id="contactMessage" используется в JS. -->
+              </div>
+
+              <button id="sendBtn" type="submit" class="btn btn-outline-success w-100">
+                שליחת הודעה
+              </button>
+              <!-- // Кнопка отправки:
+                   // type="submit" триггерит submit формы
+                   // id="sendBtn" используется в JS для disabled
+                   // btn-outline-success = зеленый контур
+                   // w-100 = 100% ширины -->
+
+              <div id="formStatus" class="sentra-status"></div>
+              <!-- // Место для статуса отправки (успех/ошибка/ожидание). id нужен для JS -->
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+        <!-- // Правая колонка -->
+
+          <div class="sentra-card h-100">
+          <!-- // Карточка на всю высоту колонки -->
+
+            <h2 class="h6 mb-2">פרטי קשר (דמו)</h2>
+            <!-- // Заголовок раздела с “демо” контактами. h6 = размер Bootstrap, mb-2 отступ -->
+
+            <ul class="list-unstyled small text-muted">
+            <!-- // Список без маркеров, маленький и приглушённый -->
+
+              <li>• מייל פרויקט: sentramind@project.local</li>
+              <!-- // Демо email проекта (сейчас не настоящий домен) -->
+
+              <li>• GitHub: github.com/your-sentramind</li>
+              <!-- // Демо GitHub ссылка (текстом) -->
+
+              <li>• Discord: Sentramind Dev Server</li>
+              <!-- // Демо Discord -->
+            </ul>
+
+            <p class="small mt-3 text-muted">
+              כרגע הטופס שומר הודעות במסד נתונים.
+              בהמשך אפשר להוסיף שליחה לטלגרם / אימייל דרך Firebase Functions.
+            </p>
+            <!-- // Пояснение: сейчас сохранение в БД, потом можно добавить отправку через Functions -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase SDK (compat, כמו אצלך ב-radar.js) -->
+  <!-- // Подключение Firebase SDK “compat” версии (как в radar.js) -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <!-- // Firebase App: нужен для initializeApp -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <!-- // Firebase Realtime Database: нужен для firebase.database() -->
+
+  <script>
+    // Firebase config (כמו ב-radar.js שלך)
+    // // Конфиг проекта Firebase (ключи и идентификаторы проекта)
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbV_d5Y-Y1Z6Fgv9s6qEdwOa8ja7a-3EQ",
+      // // Ключ API проекта Firebase (не секрет, но лучше хранить аккуратно)
+
+      authDomain: "sentrygun-lazer.firebaseapp.com",
+      // // Домен авторизации Firebase (для auth, даже если тут auth не используешь)
+
+      databaseURL: "https://sentrygun-lazer-default-rtdb.europe-west1.firebasedatabase.app",
+      // // URL Realtime Database (куда будут писаться сообщения)
+
+      projectId: "sentrygun-lazer",
+      // // ID проекта
+
+      storageBucket: "sentrygun-lazer.appspot.com",
+      // // Bucket Firebase Storage (здесь не используется, но в конфиге есть)
+
+      messagingSenderId: "424543118066",
+      // // Sender ID для Cloud Messaging (здесь не используется)
+
+      appId: "1:424543118066:web:97a60c901fe6d66e2e266b"
+      // // ID web-приложения Firebase
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    // // Инициализация Firebase (создаёт “app” по умолчанию)
+
+    const db = firebase.database();
+    // // Получаем доступ к Realtime Database
+
+    // DOM
+    // // Берём элементы со страницы по id
+
+    const form = document.getElementById("contactForm");
+    // // Форма, чтобы повесить обработчик submit
+
+    const nameEl = document.getElementById("contactName");
+    // // Поле имени
+
+    const emailEl = document.getElementById("contactEmail");
+    // // Поле email
+
+    const msgEl = document.getElementById("contactMessage");
+    // // Поле сообщения
+
+    const statusEl = document.getElementById("formStatus");
+    // // Блок для статуса
+
+    const sendBtn = document.getElementById("sendBtn");
+    // // Кнопка отправки (будем блокировать на время отправки)
+
+    function setStatus(text, ok) {
+      // // Функция: показать статус и покрасить в зелёный/красный
+
+      statusEl.textContent = text;
+      // // Текст статуса
+
+      statusEl.classList.remove("ok", "bad");
+      // // Убираем прошлые классы состояния
+
+      statusEl.classList.add(ok ? "ok" : "bad");
+      // // Добавляем ok (зелёный) или bad (красный)
+    }
+
+    form.addEventListener("submit", async (e) => {
+      // // Обработчик отправки формы
+
+      e.preventDefault();
+      // // Не перезагружать страницу (иначе JS не успеет сохранить в Firebase)
+
+      const name = nameEl.value.trim();
+      // // Имя без пробелов по краям
+
+      const email = emailEl.value.trim();
+      // // Email без пробелов по краям
+
+      const message = msgEl.value.trim();
+      // // Сообщение без пробелов по краям
+
+      if (!name || !email || !message) {
+        // // Если что-то пустое — показываем ошибку
+        setStatus("נא למלא את כל השדות.", false);
+        // // Текст на иврите: “Заполните все поля”
+        return;
+        // // Остановить отправку
+      }
+
+      sendBtn.disabled = true;
+      // // Блокируем кнопку, чтобы не нажали 10 раз
+
+      setStatus("שולח... שומר ב־Firebase", true);
+      // // Показываем “Отправляю... сохраняю в Firebase” как ok (зелёный)
+
+      try {
+        const ref = db.ref("messages").push();
+        // // Создаём новый уникальный ключ в ветке messages (push генерирует id)
+
+        await ref.set({
+          name,
+          // // Сохраняем имя
+
+          email,
+          // // Сохраняем email
+
+          message,
+          // // Сохраняем текст сообщения
+
+          createdAt: new Date().toISOString(),
+          // // Время создания в ISO формате (удобно сортировать)
+
+          status: "new",
+          // // Статус сообщения (можешь потом менять на “read”, “done” и т.п.)
+
+          source: "contact.html"
+          // // Источник, откуда пришло (если потом будут разные формы)
+        });
+
+        setStatus("נשלח בהצלחה. ההודעה נשמרה במסד הנתונים.", true);
+        // // Успешно: “Отправлено. Сохранено в базе.”
+
+        form.reset();
+        // // Очистить форму
+      } catch (err) {
+        setStatus("שגיאה בשליחה: " + (err && err.message ? err.message : err), false);
+        // // Ошибка: покажем текст ошибки Firebase
+      } finally {
+        sendBtn.disabled = false;
+        // // В любом случае разблокируем кнопку
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- // Bootstrap JS: нужен для burger menu/collapse -->
+
+  <!-- Firebase SDK -->
+  <!-- // !!! ВНИМАНИЕ: ниже у тебя повторно подключается Firebase SDK, это лишнее -->
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<!-- // ДУБЛЬ: уже подключено выше. Лучше удалить. -->
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<!-- // ДУБЛЬ: уже подключено выше. Лучше удалить. -->
+
+</body>
+</html>

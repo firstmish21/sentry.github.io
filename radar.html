@@ -1,0 +1,406 @@
+<!-- radar.html -->
+<!-- // Это файл страницы радара (HTML-разметка). Обычно открывается в браузере. -->
+
+<!DOCTYPE html>
+<!-- // Говорит браузеру: документ в формате HTML5. -->
+
+<html lang="he" dir="rtl">
+<!-- // Корневой тег страницы. lang="he" = язык иврит. dir="rtl" = направление справа-налево (важно для иврита). -->
+
+<head>
+<!-- // “Голова” документа: настройки, заголовок вкладки, подключения CSS/мета. -->
+
+  <meta charset="UTF-8" />
+  <!-- // Кодировка UTF-8: чтобы нормально отображались иврит/русский/символы. -->
+
+  <title>Sentramind — לוח רדאר</title>
+  <!-- // Заголовок вкладки браузера (то, что видно сверху). -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- // Адаптивность на телефоне: ширина = ширине экрана, масштаб 1.0. -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- // Подключение Bootstrap 5 (готовые классы: container, navbar, btn, d-flex и т.д.). -->
+
+  <link rel="stylesheet" href="radar.css">
+  <!-- // Подключение твоего CSS. Всё что типа .sentra-card, .neo-radar, .status-dot и т.д. — обычно тут. -->
+</head>
+<!-- // Конец head. -->
+
+<body>
+<!-- // Тело страницы: всё видимое пользователю. -->
+
+  <!-- NAVBAR -->
+  <!-- // Комментарий-раздел: навигационная панель сверху. -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!-- // Bootstrap navbar: 
+       // navbar-expand-lg = в “бургере” на маленьких экранах
+       // navbar-dark = тёмная тема текста
+       // fixed-top = приклеена к верху экрана. -->
+
+    <div class="container">
+    <!-- // Bootstrap container: ограничивает ширину и даёт красивые отступы. -->
+
+      <a class="navbar-brand d-flex align-items-center" href="#">
+      <!-- // Логотип/бренд слева. 
+           // d-flex align-items-center = выравнивание в одну линию и по центру по вертикали.
+           // href="#" = пока никуда не ведёт (можно заменить на index.html). -->
+
+        <img src="orolmini.png" class="me-2" style="height:34px" />
+        <!-- // Картинка логотипа. me-2 = margin-end (справа в LTR, слева в RTL может меняться) от Bootstrap. 
+             // style height:34px = фикс высота. -->
+
+        <span class="fw-semibold">SENTRAMIND</span>
+        <!-- // Текст бренда. fw-semibold = полужирный шрифт (Bootstrap). -->
+      </a>
+      <!-- // Конец бренда. -->
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <!-- // Кнопка “бургер” для мобильного меню.
+           // data-bs-toggle="collapse" включает механизм сворачивания Bootstrap.
+           // data-bs-target="#nav" привязка к блоку <div id="nav"> ниже. -->
+
+        <span class="navbar-toggler-icon"></span>
+        <!-- // Иконка бургера (Bootstrap рисует через CSS). -->
+      </button>
+      <!-- // Конец кнопки меню. -->
+
+      <div class="collapse navbar-collapse" id="nav">
+      <!-- // Блок меню, который будет “collapse/expand”.
+           // id="nav" должен совпадать с data-bs-target="#nav". -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- // Список пунктов меню.
+             // navbar-nav = стиль пунктов.
+             // ms-auto = отодвинуть меню в сторону (auto margin start).
+             // mb-2 mb-lg-0 = отступ снизу на маленьком экране и убрать на больших. -->
+
+          <li class="nav-item"><a class="nav-link" href="index.html">דף הבית</a></li>
+          <!-- // Пункт меню “Главная”. href ведёт на index.html. -->
+
+          <li class="nav-item"><a class="nav-link active" href="#">רדאר</a></li>
+          <!-- // Пункт “Радар”. active = подсветка текущей страницы. href="#" = ты уже здесь. -->
+
+          <li class="nav-item"><a class="nav-link" href="contact.html">יצירת קשר</a></li>
+          <!-- // Пункт “Контакты”. -->
+
+          <li class="nav-item"><a class="nav-link" href="gallery.html">גלריה</a></li>
+          <!-- // Пункт “Галерея”. -->
+
+          <li class="nav-item"><a class="nav-link" href="about.html">על הפרויקט</a></li>
+          <!-- // Пункт “О проекте”. -->
+
+          <li class="nav-item">
+          <!-- // Отдельный пункт меню, внутри кнопка. -->
+
+            <button id="logoutBtn" class="btn btn-sm btn-outline-light ms-2 d-none">יציאה</button>
+            <!-- // Кнопка “Выйти”.
+                 // id="logoutBtn" — привязка к JS (radar.js) чтобы повесить обработчик logout.
+                 // btn btn-sm btn-outline-light = стиль Bootstrap.
+                 // ms-2 = небольшой отступ (margin start).
+                 // d-none = скрыта по умолчанию; JS показывает после логина. -->
+          </li>
+          <!-- // Конец пункта с кнопкой. -->
+
+        </ul>
+        <!-- // Конец списка меню. -->
+      </div>
+      <!-- // Конец блока collapse. -->
+
+    </div>
+    <!-- // Конец container. -->
+  </nav>
+  <!-- // Конец navbar. -->
+
+  <!-- AUTH -->
+  <!-- // Раздел авторизации (логин/регистрация). -->
+
+  <section id="authSection" class="auth-wrap">
+  <!-- // Блок авторизации.
+       // id="authSection" — привязка к JS: показывать/скрывать при входе.
+       // class="auth-wrap" — твой CSS (radar.css) для оформления/позиционирования. -->
+
+    <div class="auth-card text-center">
+    <!-- // Карточка авторизации.
+         // auth-card — твой CSS.
+         // text-center — Bootstrap: центрирование текста. -->
+
+      <img src="orolbig.png" alt="Sentramind" class="auth-logo" />
+      <!-- // Большой логотип на форме. auth-logo — твой CSS. -->
+
+      <div class="auth-title">SENTRAMIND</div>
+      <!-- // Заголовок формы. auth-title — твой CSS. -->
+
+      <div class="auth-sub">REALTIME RADAR · ESP32 · FIREBASE</div>
+      <!-- // Подзаголовок/слоган. auth-sub — твой CSS. -->
+
+      <form id="authForm" class="text-start">
+      <!-- // Форма логина/регистрации.
+           // id="authForm" — JS ловит submit.
+           // text-start — Bootstrap: выравнивание текста по началу строки (для RTL это “справа”). -->
+
+        <div class="mb-2">
+        <!-- // Обёртка поля (Bootstrap). mb-2 = отступ снизу. -->
+
+          <label class="form-label">אימייל</label>
+          <!-- // Подпись поля email. form-label — стиль Bootstrap. -->
+
+          <input type="email" class="form-control" id="authEmail" required />
+          <!-- // Поле ввода email:
+               // type="email" включает валидацию email в браузере.
+               // form-control — Bootstrap стиль.
+               // id="authEmail" — JS будет читать значение.
+               // required — нельзя отправить пустым. -->
+        </div>
+
+        <div class="mb-2">
+        <!-- // Обёртка поля пароля. -->
+
+          <label class="form-label">סיסמה</label>
+          <!-- // Подпись “Пароль”. -->
+
+          <input type="password" class="form-control" id="authPassword" required minlength="6" />
+          <!-- // Поле пароля:
+               // type="password" скрывает символы.
+               // id="authPassword" — JS будет читать значение.
+               // minlength="6" — минимальная длина (часто Firebase требует 6+).
+               // required — обязательно. -->
+        </div>
+
+        <div class="auth-error" id="authError"></div>
+        <!-- // Место для вывода ошибки (например, неверный пароль).
+             // id="authError" — JS вставляет текст.
+             // auth-error — твой CSS (красный/видимость и т.п.). -->
+
+        <button type="submit" class="btn btn-sentra w-100 mt-2" id="authSubmit">התחברות</button>
+        <!-- // Кнопка отправки формы.
+             // type="submit" запускает submit у form.
+             // btn-sentra — твой кастомный стиль (цвет/акцент).
+             // w-100 = ширина 100%.
+             // mt-2 = отступ сверху.
+             // id="authSubmit" — можно менять текст в JS (login/register). -->
+      </form>
+      <!-- // Конец формы. -->
+
+      <div class="auth-toggle mt-3">
+      <!-- // Переключатель режима “логин/регистрация”. -->
+
+        <span id="authModeText">אין לך משתמש?</span>
+        <!-- // Текст перед кнопкой. id="authModeText" — JS меняет фразу под режим. -->
+
+        <button id="authModeBtn" type="button">הרשמה</button>
+        <!-- // Кнопка переключения режима.
+             // type="button" чтобы НЕ отправляла форму.
+             // id="authModeBtn" — JS ловит click и меняет режим. -->
+      </div>
+    </div>
+  </section>
+  <!-- // Конец секции auth. -->
+
+  <!-- MAIN -->
+  <!-- // Основная панель (показывается после входа). -->
+
+  <main id="mainPanel">
+  <!-- // Главный контейнер контента.
+       // id="mainPanel" — JS будет скрывать до логина и показывать после. -->
+
+    <section class="brand-hero">
+    <!-- // Верхний “hero”-блок с брендингом. brand-hero — твой CSS. -->
+
+      <img src="orolbig.png" alt="Sentramind" class="brand-mark" />
+      <!-- // Лого в hero. brand-mark — твой CSS. -->
+
+      <h1 class="brand-name">SENTRAMIND</h1>
+      <!-- // Большой заголовок. brand-name — твой CSS. -->
+
+      <p class="brand-tagline">REALTIME RADAR · ESP32 · FIREBASE</p>
+      <!-- // Подпись под заголовком. brand-tagline — твой CSS. -->
+
+      <iframe src="https://store.steampowered.com/widget/1222140/" frameborder="0" width="646" height="190"></iframe>
+      <!-- // Встроенный Steam-виджет по appid 1222140.
+           // iframe — внешний контент, НЕ связан с Firebase.
+           // width/height фиксируют размеры. -->
+    </section>
+
+    <div class="container mb-5">
+    <!-- // Основной контейнер контента страницы. mb-5 = большой отступ снизу. -->
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+      <!-- // Верхняя строка статуса.
+           // d-flex = flex
+           // justify-content-between = раздвигает элементы по краям
+           // align-items-center = выравнивание по вертикали
+           // mb-3 = отступ снизу -->
+
+        <div class="d-flex align-items-center">
+        <!-- // Левая (или стартовая) часть: точка статуса + текст. -->
+
+          <div id="statusDot" class="status-dot"></div>
+          <!-- // Индикатор “онлайн/оффлайн/нет данных”.
+               // id="statusDot" — JS меняет класс/цвет.
+               // status-dot — твой CSS (кружок). -->
+
+          <div id="statusText" class="status-text">ממתין לנתונים...</div>
+          <!-- // Текст статуса.
+               // id="statusText" — JS обновляет (например “Connected”, “No data”…).
+               // status-text — твой CSS. -->
+        </div>
+      </div>
+
+      <div class="layout">
+      <!-- // Сетка/раскладка карточек (скорее всего flex/grid из radar.css). -->
+
+        <!-- RADAR -->
+        <!-- // Левая карточка: визуальный радар. -->
+
+        <div class="sentra-card">
+        <!-- // Карточка в стиле проекта. sentra-card — твой CSS (фон/рамки/тени). -->
+
+          <div class="lzr-card-title">חיישן מרחק · רדאר</div>
+          <!-- // Заголовок карточки. lzr-card-title — твой CSS. -->
+
+          <div class="radar-wrap">
+          <!-- // Обёртка для радара (позиционирование, размеры). -->
+
+            <div class="neo-radar" id="neoRadar">
+            <!-- // Сам радар.
+                 // id="neoRadar" — JS может обращаться к контейнеру.
+                 // neo-radar — твой CSS: круг, фон, эффекты. -->
+
+              <div class="grid-line h h1"></div>
+              <!-- // Горизонтальная линия сетки (уровень 1). Классы: grid-line + h + h1. -->
+
+              <div class="grid-line h h2"></div>
+              <!-- // Горизонтальная линия сетки (уровень 2). -->
+
+              <div class="grid-line h h3"></div>
+              <!-- // Горизонтальная линия сетки (уровень 3). -->
+
+              <div class="grid-line v v1"></div>
+              <!-- // Вертикальная линия сетки (уровень 1). -->
+
+              <div class="grid-line v v2"></div>
+              <!-- // Вертикальная линия сетки (уровень 2). -->
+
+              <div class="grid-line v v3"></div>
+              <!-- // Вертикальная линия сетки (уровень 3). -->
+
+              <div class="ring r1"></div>
+              <!-- // Кольцо радара 1 (круг). Оформление в CSS. -->
+
+              <div class="ring r2"></div>
+              <!-- // Кольцо радара 2. -->
+
+              <div class="ring r3"></div>
+              <!-- // Кольцо радара 3. -->
+
+              <div id="neoSweep" class="sweep"></div>
+              <!-- // “Луч”/сканирование радара.
+                   // id="neoSweep" — JS вращает/анимирует (обычно через transform/rotate).
+                   // class sweep — твой CSS для градиента/анимации. -->
+
+              <div id="neoDot" class="target-dot"></div>
+              <!-- // Точка цели на радаре.
+                   // id="neoDot" — JS двигает по координатам (зависит от distance + angle).
+                   // target-dot — твой CSS (цвет/свечение). -->
+
+              <div class="radar-label">radar/distanceCm · currentAngle</div>
+              <!-- // Подпись какие поля показываются (скорее всего путь Firebase).
+                   // Это просто текст, не “привязан” к JS, но объясняет что читаешь из базы. -->
+
+              <div id="neoDistance" class="radar-distance">
+              <!-- // Текст дистанции в сантиметрах.
+                   // id="neoDistance" — JS ставит число из Firebase.
+                   // radar-distance — твой CSS (большой шрифт и т.п.). -->
+
+                --<small>ס״מ</small>
+                <!-- // "--" = заглушка пока нет данных. small = маленький текст “см”. -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <!-- // Правая карточка: управление и данные (серво/лазер). -->
+
+        <div class="sentra-card">
+        <!-- // Вторая карточка в том же стиле. -->
+
+          <div class="lzr-card-title">שליטה ונתונים</div>
+          <!-- // Заголовок “Управление и данные”. -->
+
+          <div class="info-row">
+          <!-- // Строка “лейбл + значение”. info-row — твой CSS. -->
+
+            <div class="info-label">זווית צריח</div>
+            <!-- // Подпись: “Угол турели”. info-label — твой CSS. -->
+
+            <div id="servoAngle" class="info-value mono">--°</div>
+            <!-- // Значение угла.
+                 // id="servoAngle" — JS подставляет угол (из Firebase currentAngle).
+                 // mono — моноширинный шрифт (обычно для цифр).
+                 // "--°" заглушка. -->
+          </div>
+
+          <div class="mt-3 text-start d-flex gap-2 flex-wrap">
+          <!-- // Блок кнопок.
+               // mt-3 отступ сверху
+               // text-start = выравнивание
+               // d-flex = flex
+               // gap-2 = расстояние между кнопками
+               // flex-wrap = перенос строк, если места мало -->
+
+            <button id="servoToggleBtn" class="btn btn-outline-light btn-sm" data-enabled="1">
+            <!-- // Кнопка включения/выключения сервопривода.
+                 // id="servoToggleBtn" — JS ловит click и пишет в Firebase.
+                 // data-enabled="1" — начальное состояние (вкл). JS может менять атрибут и текст. -->
+
+              כיבוי סרבו
+              <!-- // Текст на кнопке: “Выключить серво”. -->
+            </button>
+
+            <button id="laserToggleBtn" class="btn btn-outline-danger btn-sm" data-enabled="0">
+            <!-- // Кнопка лазера.
+                 // id="laserToggleBtn" — JS ловит click и пишет в Firebase.
+                 // btn-outline-danger = красная обводка (Bootstrap).
+                 // data-enabled="0" — начальное состояние (выкл). -->
+
+              לייזר OFF
+              <!-- // Текст: “Лазер OFF”. -->
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase SDK -->
+  <!-- // Подключение Firebase (compat-версии v9). Нужны для auth + realtime database. -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <!-- // Firebase core: firebase.initializeApp(...) и базовая инициализация приложения. -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <!-- // Firebase Auth: логин/регистрация/выход. Привязано к форме authForm и кнопке logoutBtn в radar.js. -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <!-- // Firebase Realtime Database: чтение distanceCm/currentAngle и запись команд (laser/servo). -->
+
+  <script src="radar.js"></script>
+  <!-- // Твой JS-скрипт: 
+       // 1) инициализация Firebase config
+       // 2) обработка authForm / authModeBtn / logoutBtn
+       // 3) подписка на realtime данные (distanceCm/currentAngle)
+       // 4) управление neoSweep/neoDot/neoDistance/statusText/statusDot/servoAngle
+       // 5) обработка servoToggleBtn и laserToggleBtn -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- // Bootstrap JS (bundle включает Popper): нужен для navbar collapse (data-bs-toggle) и других компонентов. -->
+
+</body>
+<!-- // Конец body. -->
+
+</html>
+<!-- // Конец документа. -->

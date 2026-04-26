@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!-- // HTML5 документ. -->
+
+<html lang="he" dir="rtl">
+<!-- // Язык: иврит (he). Направление текста: справа-налево (rtl). -->
+
+<head>
+<!-- // Head: мета, заголовок вкладки, подключения CSS/Bootstrap, стили страницы. -->
+
+  <meta charset="UTF-8" />
+  <!-- // Кодировка UTF-8 для корректного отображения иврита/символов. -->
+
+  <title>SENTRAMIND — דף הבית</title>
+  <!-- // Заголовок вкладки браузера: “SENTRAMIND — Главная”. -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- // Адаптивность: под мобильные экраны. -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- // Подключение Bootstrap 5 CSS: navbar, grid (row/col), кнопки, отступы и т.п. -->
+
+  <style>
+    /* // Встроенный CSS именно для этой страницы home.html. */
+
+    :root{
+      /* // CSS-переменные (палитра/цвета проекта) доступны через var(--...). */
+      --sentra-bg:#020617;
+      /* // Основной тёмный фон. */
+      --sentra-accent:#22c55e;
+      /* // Акцентный зелёный (бренд). */
+      --sentra-text:#e5f4ff;
+      /* // Основной цвет текста. */
+      --sentra-muted:#94a3b8;
+      /* // Приглушённый текст. */
+      --sentra-card: rgba(2, 6, 23, 0.82);
+      /* // Цвет карточек (тут почти не используется, т.к. .sentra-card задаёт градиент). */
+      --sentra-border: rgba(148, 163, 184, 0.35);
+      /* // Цвет рамки карточек. */
+    }
+
+    *{box-sizing:border-box}
+    /* // Все элементы: box-sizing border-box (удобнее для размеров). */
+
+    body{
+      min-height:100vh;
+      /* // Минимальная высота — весь экран. */
+
+      background: radial-gradient(circle at top, #0b1220, #020617 60%, #000 100%);
+      /* // Общий фон страницы. */
+
+      color:var(--sentra-text);
+      /* // Цвет текста по умолчанию. */
+
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      /* // Системные шрифты. */
+    }
+
+    .navbar{
+      /* // Стили для Bootstrap navbar: <nav class="navbar ..."> */
+      backdrop-filter: blur(10px);
+      /* // “Стеклянный” blur эффект под навбаром. */
+
+      background: rgba(2, 6, 23, 0.92) !important;
+      /* // Фон навбара + !important, чтобы перебить Bootstrap. */
+
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      /* // Нижняя линия-разделитель. */
+    }
+
+    .navbar-brand span{
+      /* // Текст в бренде: <a class="navbar-brand ..."><span>...</span></a> */
+      letter-spacing:0.18em;
+      /* // Разрядка букв. */
+      font-size:.85rem;
+      /* // Размер текста. */
+    }
+
+    .hero{
+      /* // Верхний “hero”-блок (лого+название+слоган). */
+      padding-top: 92px;
+      /* // Отступ сверху под fixed navbar. */
+      padding-bottom: 26px;
+      /* // Отступ снизу. */
+      text-align:center;
+      /* // Центрируем содержимое. */
+    }
+
+    .logo{
+      /* // Большой логотип в hero: <img class="logo"> */
+      height: 86px;
+      /* // Высота лого. */
+      border-radius: 18px;
+      /* // Скругление углов. */
+      box-shadow: 0 0 28px rgba(34,197,94,.85);
+      /* // Зелёное свечение. */
+    }
+
+    .title{
+      /* // Заголовок SENTRAMIND в hero. */
+      margin-top: 16px;
+      /* // Отступ сверху после лого. */
+      font-weight: 800;
+      /* // Очень жирный. */
+      letter-spacing: .35em;
+      /* // Сильная разрядка. */
+      text-indent: .35em;
+      /* // Компенсация letter-spacing, чтобы визуально “центр” был норм. */
+      font-size: 1.6rem;
+      /* // Размер заголовка. */
+    }
+
+    .tag{
+      /* // Подзаголовок (REALTIME RADAR...). */
+      margin-top: 6px;
+      /* // Отступ сверху. */
+      color: #4ade80;
+      /* // Светло-зелёный. */
+      letter-spacing: .28em;
+      /* // Разрядка. */
+      text-indent: .28em;
+      /* // Компенсация. */
+      font-size: .85rem;
+      /* // Размер. */
+      text-transform: uppercase;
+      /* // Капсом (актуально для латиницы). */
+    }
+
+    .wrap{
+      /* // Внешний контейнер для карточек. */
+      max-width: 1100px;
+      /* // Максимальная ширина блока. */
+      margin: 0 auto;
+      /* // Центрирование по странице. */
+      padding: 0 16px 40px;
+      /* // Отступы: слева/справа + снизу. */
+    }
+
+    .sentra-card{
+      /* // Твои карточки (внутри col). Привязано к <div class="sentra-card"> */
+      background: radial-gradient(circle at top, #020617, #000814);
+      /* // Тёмный градиент карточки. */
+
+      border: 1px solid var(--sentra-border);
+      /* // Рамка карточки из переменной. */
+
+      border-radius: 20px;
+      /* // Скругление. */
+
+      padding: 18px 18px 16px;
+      /* // Внутренние отступы. */
+
+      box-shadow: 0 24px 48px rgba(0,0,0,.95);
+      /* // Тень “глубина”. */
+
+      height: 100%;
+      /* // Важно: карточка растягивается по высоте колонки (чтобы кнопки выровнялись). */
+    }
+
+    .card-title{
+      /* // Заголовок внутри карточек: <div class="card-title"> */
+      font-size: .9rem;
+      /* // Размер. */
+      text-transform: uppercase;
+      /* // Капсом. */
+      letter-spacing: .16em;
+      /* // Разрядка. */
+      color: var(--sentra-muted);
+      /* // Приглушённый цвет. */
+      margin-bottom: 8px;
+      /* // Отступ снизу. */
+    }
+
+    .card-desc{
+      /* // Текст описания: <div class="card-desc"> */
+      color: var(--sentra-text);
+      /* // Основной цвет текста. */
+      opacity: .92;
+      /* // Чуть приглушаем. */
+      font-size: .95rem;
+      /* // Размер. */
+      line-height: 1.55;
+      /* // Межстрочный интервал. */
+      margin-bottom: 14px;
+      /* // Отступ перед кнопкой. */
+    }
+
+    .btn-sentra{
+      /* // Твоя акцентная кнопка (зелёная) для “כניסה לרדאר”. */
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+      /* // Градиент. */
+      border: none;
+      /* // Без рамки. */
+      color: #020617;
+      /* // Тёмный текст. */
+      font-weight: 700;
+      /* // Жирный. */
+      letter-spacing: .06em;
+      /* // Разрядка. */
+    }
+
+    .btn-sentra:hover{
+      /* // Hover-состояние зелёной кнопки. */
+      background: linear-gradient(90deg, #16a34a, #22c55e);
+      /* // Чуть темнее. */
+    }
+
+    .chip{
+      /* // “Чип” под слоганом: <div class="chip">... */
+      display:inline-flex;
+      /* // Лейаут чипа: inline-flex. */
+      align-items:center;
+      /* // Выравнивание по вертикали. */
+      gap:8px;
+      /* // Расстояние между иконкой и текстом. */
+      padding: 6px 12px;
+      /* // Внутренние отступы. */
+      border-radius: 999px;
+      /* // Полностью “пилюля”. */
+      border: 1px solid rgba(34,197,94,.35);
+      /* // Тонкая зелёная рамка. */
+      background: rgba(34,197,94,.08);
+      /* // Слабый зелёный фон. */
+      color: #bbf7d0;
+      /* // Светло-зелёный текст. */
+      font-size: .85rem;
+      /* // Размер текста. */
+      margin-top: 12px;
+      /* // Отступ сверху. */
+    }
+
+    .footer{
+      /* // Футер внизу. */
+      border-top: 1px solid rgba(148,163,184,.25);
+      /* // Линия сверху. */
+      color: var(--sentra-muted);
+      /* // Приглушённый цвет. */
+      padding: 16px 0 28px;
+      /* // Отступы. */
+      text-align:center;
+      /* // Центр. */
+      font-size: .85rem;
+      /* // Размер. */
+    }
+  </style>
+</head>
+
+<body>
+<!-- // Начало страницы. -->
+
+  <!-- NAVBAR -->
+  <!-- // Верхнее меню навигации. -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!-- // Bootstrap navbar:
+       // navbar-expand-lg — бургер на мобиле.
+       // navbar-dark — светлый текст на тёмном фоне.
+       // fixed-top — закреплён наверху. -->
+
+    <div class="container">
+    <!-- // Bootstrap container. -->
+
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+      <!-- // Бренд: кликабельная ссылка на home.html.
+           // d-flex align-items-center — выравнивание лого+текста. -->
+
+        <img src="orolmini.png" class="me-2" style="height:34px" />
+        <!-- // Малый логотип. me-2 = отступ (Bootstrap). -->
+
+        <span class="fw-semibold">SENTRAMIND</span>
+        <!-- // Текст бренда. fw-semibold = Bootstrap полужирный. -->
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <!-- // Кнопка “бургер”.
+           // Привязка data-bs-target="#nav" к div ниже с id="nav". -->
+
+        <span class="navbar-toggler-icon"></span>
+        <!-- // Иконка бургера от Bootstrap. -->
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+      <!-- // Сворачиваемая часть навбара. -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- // Список пунктов меню.
+             // ms-auto = отодвинуть меню.
+             // mb-2 mb-lg-0 = отступы. -->
+
+             <li class="nav-item">
+    <a class="nav-link" href="index.html">דף הבית</a>
+  </li>
+          <!-- // ВНИМАНИЕ: этот пункт “דף הבית” у тебя ДУБЛИРУЕТСЯ ниже.
+               // Лучше оставить один. -->
+
+          <li class="nav-item"><a class="nav-link" href="index.html">דף הבית</a></li>
+          <!-- // Дубликат пункта “дף הבית”. Один из двух стоит удалить. -->
+
+          <li class="nav-item"><a class="nav-link" href="radar.html">רדאר</a></li>
+          <!-- // Переход на страницу радара. -->
+
+          <li class="nav-item"><a class="nav-link" href="gallery.html">גלריה</a></li>
+          <!-- // Переход на галерею. -->
+
+          <li class="nav-item"><a class="nav-link" href="about.html">על הפרויקט</a></li>
+          <!-- // Переход на страницу “о проекте”. -->
+
+          <li class="nav-item"><a class="nav-link" href="contact.html">יצירת קשר</a></li>
+          <!-- // Переход на “контакты”. -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <!-- // Верхний блок с логотипом/названием/слоганом. -->
+
+  <section class="hero">
+  <!-- // Секция hero. -->
+
+    <img src="orolbig.png" alt="Sentramind" class="logo" />
+    <!-- // Большой логотип, стили .logo. -->
+
+    <div class="title">SENTRAMIND</div>
+    <!-- // Название проекта, стили .title. -->
+
+    <div class="tag">REALTIME RADAR · ESP32 · FIREBASE</div>
+    <!-- // Слоган, стили .tag. -->
+
+    <div class="chip">🔎 מערכת ניטור בזמן אמת (Realtime)</div>
+    <!-- // Чип-плашка с описанием.
+         // Тут есть эмодзи 🔎 (если тебе надо без эмодзи — можно убрать). -->
+  </section>
+
+  <div class="wrap">
+  <!-- // Основной контейнер карточек. -->
+
+    <div class="row g-4">
+    <!-- // Bootstrap сетка:
+         // row = строка,
+         // g-4 = gap между колонками. -->
+
+      <!-- RADAR -->
+      <div class="col-12 col-lg-6">
+      <!-- // Колонка: на мобиле 12 (вся ширина), на lg и выше 6 (половина). -->
+
+        <div class="sentra-card">
+        <!-- // Карточка радара. -->
+
+          <div class="card-title">לוח רדאר (Radar Dashboard)</div>
+          <!-- // Заголовок карточки. -->
+
+          <div class="card-desc">
+            כניסה ללוח הראשי שמציג את נתוני ה־(ESP32) בזמן אמת: זווית סרבו, מרחק מהחיישן, ותצוגת רדאר חיה.
+          </div>
+          <!-- // Описание карточки. -->
+
+          <a class="btn btn-sentra w-100" href="radar.html">כניסה לרדאר</a>
+          <!-- // Кнопка-ссылка в радар.
+               // btn = Bootstrap,
+               // btn-sentra = твой зелёный стиль,
+               // w-100 = на всю ширину. -->
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="col-12 col-lg-6">
+      <!-- // Колонка “О проекте”. -->
+
+        <div class="sentra-card">
+          <div class="card-title">על הפרויקט (About)</div>
+          <div class="card-desc">
+            תיאור מטרות הפרויקט, רכיבי החומרה, תכנון המערכת, ותהליך הפיתוח של המערכת (IoT).
+          </div>
+
+          <a class="btn btn-outline-light w-100" href="about.html">לקרוא על הפרויקט</a>
+          <!-- // Bootstrap outline кнопка (без твоего btn-sentra). -->
+        </div>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="col-12 col-lg-6">
+      <!-- // Колонка “Галерея”. -->
+
+        <div class="sentra-card">
+          <div class="card-title">גלריה (Gallery)</div>
+          <div class="card-desc">
+            תמונות / סרטונים / צילומי מסך של המערכת, החיבורים, הבדיקות והדמו של הרדאר.
+          </div>
+
+          <a class="btn btn-outline-light w-100" href="gallery.html">לגלריה</a>
+          <!-- // Кнопка-ссылка в gallery.html. -->
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="col-12 col-lg-6">
+      <!-- // Колонка “Контакты”. -->
+
+        <div class="sentra-card">
+          <div class="card-title">יצירת קשר (Contact)</div>
+          <div class="card-desc">
+            טופס פנייה והוספת פרטים למי שרוצה ליצור קשר על הפרויקט / הצעה / שאלה.
+          </div>
+
+          <a class="btn btn-outline-light w-100" href="contact.html">ליצירת קשר</a>
+          <!-- // Кнопка-ссылка в contact.html. -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+  <!-- // Футер страницы. -->
+
+    SENTRAMIND © — Your safety, our peace of mind.
+    <!-- // Текст футера. -->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- // Bootstrap JS bundle: нужен для navbar-toggler (collapse). -->
+</body>
+</html>

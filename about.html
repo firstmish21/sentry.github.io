@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!-- // HTML5 документ. -->
+
+<html lang="he" dir="rtl">
+<!-- // Язык страницы: иврит (he). Направление: RTL (справа налево). -->
+
+<head>
+<!-- // <head> — мета-информация, заголовок вкладки, подключения CSS/Bootstrap. -->
+
+  <meta charset="UTF-8" />
+  <!-- // Кодировка UTF-8 — чтобы иврит/символы отображались нормально. -->
+
+  <title>Sentramind — על הפרויקט</title>
+  <!-- // Заголовок вкладки браузера: "Sentramind — О проекте". -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- // Адаптивность на телефонах (правильный масштаб). -->
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- // Подключаем Bootstrap 5 CSS: сетка, navbar, кнопки, типографика. -->
+
+  <style>
+    /* // Встроенный CSS только для about.html (страница "О проекте"). */
+
+    :root {
+      /* // CSS переменные темы (одинаковые по стилю с другими страницами). */
+      --sentra-bg: #020617;         /* // основной тёмный фон */
+      --sentra-card: #020617;       /* // базовый цвет карточек */
+      --sentra-soft: #02081a;       /* // мягкий фон (если понадобится) */
+      --sentra-accent: #22c55e;     /* // акцентный зелёный */
+      --sentra-text-main: #e5f4ff;  /* // основной текст */
+      --sentra-text-muted: #94a3b8; /* // приглушённый текст */
+    }
+
+    * {
+      box-sizing: border-box;       /* // размеры элементов считаются удобнее */
+      margin: 0;                    /* // убираем дефолтные отступы */
+      padding: 0;                   /* // убираем дефолтные отступы */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      /* // системный шрифт */
+    }
+
+    body {
+      min-height: 100vh;            /* // минимум высота = экран */
+      background:
+        radial-gradient(circle at top, #0b1220, #020617 60%, #000 100%);
+      /* // фирменный фон Sentramind */
+      color: var(--sentra-text-main);
+      /* // цвет текста по умолчанию */
+    }
+
+    .navbar {
+      backdrop-filter: blur(10px);
+      /* // стеклянный эффект */
+      background: rgba(2, 6, 23, 0.92) !important;
+      /* // тёмный полупрозрачный фон navbar (перебивает Bootstrap) */
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      /* // линия снизу */
+    }
+
+    .navbar-brand span {
+      letter-spacing: 0.18em;       /* // разрядка букв логотипа */
+      font-size: 0.8rem;            /* // размер текста логотипа */
+    }
+
+    main {
+      padding-top: 80px;            /* // чтобы контент не залезал под fixed navbar */
+      padding-bottom: 40px;         /* // отступ снизу */
+    }
+
+    .sentra-card {
+      background: radial-gradient(circle at top, #020617, #000814);
+      /* // фон карточек */
+      border-radius: 20px;          /* // скругление */
+      padding: 22px 22px 24px;      /* // внутренние отступы */
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      /* // рамка */
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.95);
+      /* // тень */
+    }
+
+    .page-title {
+      letter-spacing: 0.22em;       /* // разрядка заголовка */
+      text-indent: 0.22em;          /* // компенсация разрядки */
+      font-size: 1.4rem;            /* // размер */
+      margin-bottom: 6px;           /* // отступ снизу */
+      font-weight: 700;             /* // жирный */
+    }
+
+    .page-sub {
+      font-size: 0.9rem;            /* // размер текста описания */
+      color: var(--sentra-text-muted);
+      /* // приглушённый цвет */
+    }
+
+    .badge-line {
+      letter-spacing: 0.18em;       /* // разрядка */
+      text-indent: 0.18em;          /* // компенсация */
+      font-size: 0.75rem;           /* // размер */
+      text-transform: uppercase;    /* // всё заглавными */
+    }
+
+    .highlight-pill {
+      display: inline-flex;         /* // “таблетка” в одну линию */
+      align-items: center;          /* // выравнивание по центру */
+      gap: 6px;                     /* // расстояние между точкой и текстом */
+      padding: 4px 10px;            /* // внутренние отступы */
+      border-radius: 999px;         /* // максимально круглая форма */
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      /* // зелёная рамка */
+      background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.25), #020617);
+      /* // мягкий зелёный блик */
+      font-size: 0.8rem;            /* // размер текста */
+      color: #bbf7d0;               /* // светло-зелёный текст */
+    }
+
+    .highlight-pill-dot {
+      width: 8px;                   /* // ширина точки */
+      height: 8px;                  /* // высота точки */
+      border-radius: 50%;           /* // круг */
+      background: #22c55e;          /* // зелёный */
+      box-shadow: 0 0 8px rgba(34, 197, 94, 1);
+      /* // свечение */
+    }
+
+    .section-title {
+      font-size: 0.95rem;           /* // размер заголовков секций */
+      letter-spacing: 0.16em;       /* // разрядка */
+      text-transform: uppercase;    /* // заглавные */
+      color: var(--sentra-text-muted);
+      /* // приглушённый */
+      margin-top: 16px;             /* // отступ сверху */
+      margin-bottom: 6px;           /* // отступ снизу */
+    }
+
+    .timeline {
+      border-right: 1px solid rgba(148, 163, 184, 0.35);
+      /* // линия таймлайна справа (логично для RTL) */
+      padding-right: 16px;
+      /* // отступ от линии */
+      margin-right: 4px;
+      /* // небольшой внешний отступ */
+    }
+
+    .timeline-item {
+      position: relative;           /* // нужно для ::before точки */
+      margin-bottom: 14px;          /* // расстояние между пунктами */
+      padding-right: 8px;           /* // отступ от линии */
+    }
+
+    .timeline-item::before {
+      content: "";                  /* // декоративная точка */
+      position: absolute;
+      right: -19px;                 /* // вынос точки на линию таймлайна */
+      top: 3px;                     /* // позиция по высоте */
+      width: 10px;                  /* // размер точки */
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;          /* // зелёный */
+      box-shadow: 0 0 10px rgba(34, 197, 94, 1);
+      /* // свечение */
+    }
+
+    .timeline-title {
+      font-size: 0.9rem;            /* // размер заголовка шага */
+      font-weight: 600;             /* // полужирный */
+    }
+
+    .timeline-text {
+      font-size: 0.8rem;            /* // размер описания */
+      color: var(--sentra-text-muted);
+      /* // приглушённый */
+    }
+
+    .tech-pill {
+      display: inline-block;        /* // “чип” технология */
+      padding: 4px 10px;            /* // отступы */
+      border-radius: 999px;         /* // форма таблетки */
+      background: rgba(15, 23, 42, 0.95);
+      /* // фон */
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      /* // рамка */
+      font-size: 0.75rem;           /* // размер */
+      margin: 2px;                  /* // расстояние между чипами */
+      color: var(--sentra-text-muted);
+      /* // цвет текста */
+    }
+
+    .video-note {
+      font-size: 0.8rem;            /* // размер примечаний */
+      color: var(--sentra-text-muted);
+      /* // приглушённый */
+    }
+  </style>
+</head>
+
+<body>
+<!-- // <body> — видимая часть страницы about.html -->
+
+  <!-- NAVBAR (как в других страницах) -->
+  <!-- // Верхнее меню навигации, такое же как на остальных страницах -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!-- // navbar-expand-lg: раскрыто на больших экранах
+       // navbar-dark: белый текст
+       // fixed-top: закреплено сверху -->
+
+    <div class="container">
+    <!-- // Bootstrap контейнер -->
+
+      <a class="navbar-brand d-flex align-items-center" href="radar.html">
+      <!-- // Логотип-ссылка ведёт на radar.html -->
+
+        <img src="orolmini.png" class="me-2" style="height:34px" />
+        <!-- // Иконка бренда. me-2 = margin-end (отступ в RTL тоже работает правильно). -->
+
+        <span class="fw-semibold">SENTRAMIND</span>
+        <!-- // Название бренда -->
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <!-- // Бургер-кнопка:
+           // data-bs-target="#nav" связывается с div id="nav" -->
+        <span class="navbar-toggler-icon"></span>
+        <!-- // Иконка бургера Bootstrap -->
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+      <!-- // Скрываемый блок меню -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- // Список ссылок. ms-auto прижимает список к краю. -->
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">דף הבית</a>
+          </li>
+          <!-- // Ссылка: главная (index.html) -->
+
+          <li class="nav-item"><a class="nav-link" href="radar.html">רדאר</a></li>
+          <!-- // Ссылка: радар -->
+
+          <li class="nav-item"><a class="nav-link" href="contact.html">יצירת קשר</a></li>
+          <!-- // Ссылка: контакты -->
+
+          <li class="nav-item"><a class="nav-link" href="gallery.html">גלריה</a></li>
+          <!-- // Ссылка: галерея -->
+
+          <li class="nav-item"><a class="nav-link" href="document.html">דוקומנטציה</a></li>
+          <!-- // Ссылка: документация -->
+
+          <li class="nav-item"><a class="nav-link active" href="about.html">על הפרויקט</a></li>
+          <!-- // Ссылка: о проекте (active — текущая) -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+  <!-- // Основной контент страницы -->
+
+    <div class="container">
+    <!-- // Контейнер Bootstrap -->
+
+      <!-- ВЕРХНИЙ БОЛЬШОЙ БЛОК -->
+      <!-- // Главный “hero”-блок с описанием и списком компонентов -->
+
+      <div class="sentra-card mb-4">
+      <!-- // Карточка. mb-4 = отступ снизу -->
+
+        <div class="row g-4 align-items-center">
+        <!-- // row = сетка. g-4 = расстояние. align-items-center = вертикальное выравнивание -->
+
+          <div class="col-lg-7">
+          <!-- // Левая часть (на больших экранах 7/12 ширины) -->
+
+            <div class="badge-line text-success mb-2">
+              SENTRAMIND TURRET · ESP32 · REALTIME RADAR
+            </div>
+            <!-- // Маленькая строка-бейдж (зелёная). -->
+
+            <h1 class="page-title">על הפרויקט Sentramind Turret</h1>
+            <!-- // Большой заголовок страницы -->
+
+            <p class="page-sub mb-3">
+              Sentramind Turret היא מערכת מגדל שמירה חכמה המבוססת על ESP32,
+              חיישן מרחק אולטרסוני, סרוו מסתובב וחיבור חי ל־Firebase Realtime Database.
+              המערכת סורקת את הסביבה, מודדת מרחק وزווית, ומציגה את הנתונים על לוח רדאר
+              בזמן אמת בדפדפן.
+            </p>
+            <!-- // Подробное описание: что за система, какие данные и куда идут -->
+
+            <div class="highlight-pill mb-2">
+              <span class="highlight-pill-dot"></span>
+              <span>מעקב בזמן אמת · הדגמת IoT מלאה</span>
+            </div>
+            <!-- // “Пилюля” с точкой: акцентная фраза -->
+
+            <div class="small text-muted">
+              הפרויקט מתאים להצגה כמערכת ביטחונית/לימודית שמדגימה חיבור בין חומרה,
+              ענן וממשק משתמש מודרני.
+            </div>
+            <!-- // Дополнительная подпись (мелкий текст) -->
+          </div>
+
+          <div class="col-lg-5">
+          <!-- // Правая часть (на больших экранах 5/12 ширины) -->
+
+            <div class="sentra-card h-100">
+            <!-- // Вложенная карточка внутри карточки (визуальный блок “компоненты”). h-100 растягивает по высоте. -->
+
+              <div class="section-title">מרכיבים עיקריים</div>
+              <!-- // Заголовок секции “Основные компоненты” -->
+
+              <ul class="small text-muted mb-2">
+                <li>ESP32 DevKit — תקשורת WiFi ושליטה על הסרוו.</li>
+                <!-- // ESP32: WiFi + управление сервоприводом -->
+
+                <li>HC-SR04 — חיישן מרחק אולטרסוני (distanceCm).</li>
+                <!-- // Ультразвук: distanceCm -->
+
+                <li>Servo — מנוע סרוו לסיבוב הצריח وزווית הסריקה.</li>
+                <!-- // Серво: угол/поворот -->
+
+                <li>Firebase Realtime Database — אחסון ושידור נתונים.</li>
+                <!-- // RTDB: хранение + realtime обновления -->
+
+                <li>Frontend — לוח רדאר ב־HTML + Bootstrap + JavaScript.</li>
+                <!-- // Интерфейс: веб-панель -->
+              </ul>
+
+              <div class="mt-2">
+              <!-- // Блок “чипов” с технологиями -->
+                <span class="tech-pill">ESP32</span>
+                <span class="tech-pill">HC-SR04</span>
+                <span class="tech-pill">Servo</span>
+                <span class="tech-pill">Firebase RTDB</span>
+                <span class="tech-pill">Firebase Auth</span>
+                <span class="tech-pill">Bootstrap 5</span>
+                <span class="tech-pill">Vanilla JS</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- СРЕДНИЙ БЛОК: ЦЕЛИ + ТАЙМЛАЙН -->
+      <!-- // Две колонки: цели проекта и timeline -->
+
+      <div class="row g-4 mb-4">
+      <!-- // row сетка, g-4 отступы, mb-4 отступ снизу -->
+
+        <div class="col-lg-6">
+        <!-- // Левая колонка -->
+
+          <div class="sentra-card h-100">
+          <!-- // Карточка на всю высоту -->
+
+            <div class="section-title">מטרות הפרויקט</div>
+            <!-- // Заголовок “Цели проекта” -->
+
+            <ul class="small text-muted mb-2">
+              <li>להראות שילוב בין חומרה (ESP32 + חיישנים) לבין ענן (Firebase).</li>
+              <!-- // Цель: связать железо и облако -->
+
+              <li>ליצור תצוגת רדאר ויזואלית שמציגה מרחק וזווית בצורה אינטואיטיבית.</li>
+              <!-- // Цель: визуальный радар (distance + angle) -->
+
+              <li>לאפשר שליטה על הצריח דרך נתונים בזמן אמת (כיבוי/הפעלת סרבו ועוד).</li>
+              <!-- // Цель: управление turret через realtime (например servoEnabled) -->
+
+              <li>להוות בסיס להרחבות: מצב Alarm, מעקב אחרי מטרה, סטטיסטיקות ועוד.</li>
+              <!-- // Цель: база для будущих фич -->
+            </ul>
+
+            <div class="section-title">שימושים אפשריים</div>
+            <!-- // Заголовок “Возможные применения” -->
+
+            <ul class="small text-muted mb-0">
+              <li>הדגמה בבית ספר / מכללה לפרויקט תקשורת/מערכות משובצות.</li>
+              <!-- // Применение: демонстрация/учёба -->
+
+              <li>בסיס למערכת אבטחה קטנה או סימולציה של מגדל שמירה.</li>
+              <!-- // Применение: мини-безопасность/симуляция -->
+
+              <li>מעבדה ללימוד IoT: עבודה עם ענן ו־Realtime Data.</li>
+              <!-- // Применение: IoT лаборатория -->
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+        <!-- // Правая колонка -->
+
+          <div class="sentra-card h-100">
+          <!-- // Карточка “Timeline” -->
+
+            <div class="section-title">התפתחות הפרויקט (Timeline)</div>
+            <!-- // Заголовок: “Развитие проекта” -->
+
+            <div class="timeline small text-muted">
+            <!-- // Timeline контейнер: линия справа + мелкий приглушенный текст -->
+
+              <div class="timeline-item">
+                <div class="timeline-title">שלב 1 — חיבור חיישן ו־ESP32</div>
+                <!-- // Заголовок шага 1 -->
+                <div class="timeline-text">
+                  בדיקת HC-SR04, קריאת מרחק בסיסית והדפסת נתונים ב־Serial Monitor.
+                </div>
+                <!-- // Описание шага 1 -->
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-title">שלב 2 — אינטגרציה עם Firebase</div>
+                <!-- // Заголовок шага 2 -->
+                <div class="timeline-text">
+                  שליחה וקבלה של נתונים מ־Realtime Database, יצירת מבנה <code>radar/</code> ו־<code>test/</code>.
+                </div>
+                <!-- // Описание шага 2. <code> выделяет пути в БД. -->
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-title">שלב 3 — בניית לוח הרדאר</div>
+                <!-- // Заголовок шага 3 -->
+                <div class="timeline-text">
+                  פיתוח ממשק משתמש ב־HTML + Bootstrap, הצגת מרחק وزווית על גבי "מסך רדאר".
+                </div>
+                <!-- // Описание шага 3 -->
+              </div>
+
+              <div class="timeline-item mb-0">
+              <!-- // mb-0: у последнего элемента убираем нижний отступ -->
+
+                <div class="timeline-title">שלב 4 — שליטה בצריח והרחבות</div>
+                <!-- // Заголовок шага 4 -->
+                <div class="timeline-text">
+                  כפתור כיבוי/הפעלת סרוו דרך <code>control/servoEnabled</code>,  
+                  והוספת דפים נוספים: גלריה, דוקומנטציה, יצירת קשר.
+                </div>
+                <!-- // Описание шага 4: управление + дополнительные страницы -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- НИЖНИЙ БЛОК: ВИДЕО -->
+      <!-- // Блок с видеодемонстрацией -->
+
+      <div class="sentra-card">
+      <!-- // Карточка -->
+
+        <div class="section-title">וידאו הדגמה</div>
+        <!-- // Заголовок секции: “Демо видео” -->
+
+        <p class="video-note mb-2">
+          כאן אפשר לשים סרטון שמציג את הטורֶלָה בפעולה — למשל מהטלפון או מסך מחשב.
+          בעת ההגשה / מצגת, הסרטון נותן תמונה ברורה של איך המערכת עובדת בפועל.
+        </p>
+        <!-- // Текст-пояснение: зачем нужно видео -->
+
+        <!-- МЕСТО ДЛЯ ВИДЕО -->
+        <!-- // Здесь вставка видео как локальный файл -->
+        <!-- // Вариант 1: локальный файл video.mp4 -->
+
+        <div class="ratio ratio-16x9 mb-2">
+        <!-- // Bootstrap ratio 16:9 — делает адаптивную рамку видео -->
+
+          <video src="Homemade airsoft turret suspension diary.mp4" controls style="border-radius: 12px; background:#000;">
+            הדפדפן לא תומך בווידאו. ניתן להציג כאן גם iframe של YouTube.
+          </video>
+          <!-- // <video>:
+               // src = путь к mp4 файлу (должен лежать рядом/в папке проекта)
+               // controls = кнопки play/pause
+               // style = скругление + чёрный фон
+               // Текст внутри покажется если видео не поддерживается -->
+        </div>
+
+        <!--
+        // Вариант 2: если хочешь YouTube вместо файла, раскомментируй iframe ниже.
+        <div class="ratio ratio-16x9 mb-2">
+          <iframe
+            src="https://www.youtube.com/embed/XXXXXXXXXXX"
+            title="Sentramind Turret Demo"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        -->
+
+        <p class="video-note mb-0">
+          כדי להשתמש בזה, פשוט תחליף את <code>sentramind-demo.mp4</code> בשם הקובץ שלך,
+          או תבטל את ה־<code>&lt;video&gt;</code> ותשתמש ב־<code>&lt;iframe&gt;</code> של YouTube כמו בדוגמה למעלה.
+        </p>
+        <!-- // Подсказка: что менять. (У тебя сейчас в тексте “sentramind-demo.mp4”, но в video src другое имя.) -->
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- // Bootstrap JS: нужен для navbar collapse (бургер меню). -->
+</body>
+</html>

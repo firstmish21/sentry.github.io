@@ -1,0 +1,779 @@
+/* radar.css */
+/* // Это файл стилей (CSS) для radar.html.
+   // Он “привязан” через: <link rel="stylesheet" href="radar.css"> в <head> страницы. */
+
+:root {
+/* // :root = корень документа (обычно <html>).
+   // Тут задают CSS-переменные (custom properties), чтобы потом использовать var(--...). */
+
+  --sentra-bg: #020617;
+  /* // Основной фон проекта (тёмно-синий). Используется как общий цвет/база. */
+
+  --sentra-card: #020617;
+  /* // Цвет карточек (фон блоков). */
+
+  --sentra-soft: #02081a;
+  /* // Более “мягкий” оттенок фона (для градиентов/подложек). */
+
+  --sentra-accent: #22c55e;
+  /* // Акцентный зелёный цвет (основной brand). */
+
+  --sentra-accent-soft: rgba(34, 197, 94, 0.4);
+  /* // Мягкий акцент (зелёный с прозрачностью) для теней/подсветок. */
+
+  --sentra-text-main: #e5f4ff;
+  /* // Основной цвет текста (светлый). */
+
+  --sentra-text-muted: #94a3b8;
+  /* // Приглушённый цвет текста (подписи, второстепенное). */
+}
+
+* {
+/* // Универсальный селектор: применяется ко всем элементам на странице. */
+
+  box-sizing: border-box;
+  /* // Размеры width/height включают padding+border (удобнее верстать). */
+
+  margin: 0;
+  /* // Сбрасываем стандартные отступы браузера. */
+
+  padding: 0;
+  /* // Сбрасываем стандартные внутренние отступы. */
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* // Базовый шрифт для всей страницы (системный). */
+}
+
+body {
+/* // Стили для <body> (вся видимая часть страницы). */
+
+  min-height: 100vh;
+  /* // Минимальная высота — весь экран. */
+
+  background: radial-gradient(circle at top, #0b1220, #020617 60%, #000 100%);
+  /* // Фон: радиальный градиент сверху, уходит в чёрный. */
+
+  color: var(--sentra-text-main);
+  /* // Цвет текста по умолчанию = основной светлый. */
+}
+
+.navbar {
+/* // Класс .navbar — это Bootstrap navbar в HTML:
+   // <nav class="navbar ..."> */
+
+  backdrop-filter: blur(10px);
+  /* // Размытие заднего фона под навбаром (эффект стекла). */
+
+  background: rgba(2, 6, 23, 0.92) !important;
+  /* // Полупрозрачный фон навбара.
+     // !important перебивает стили Bootstrap. */
+
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+  /* // Линия снизу навбара (разделение). */
+}
+
+.navbar-brand span {
+/* // Применяется к <span> внутри .navbar-brand:
+   // <a class="navbar-brand ..."><span>...</span></a> */
+
+  letter-spacing: 0.18em;
+  /* // Расстояние между буквами (эффект “бренд”). */
+
+  font-size: 0.8rem;
+  /* // Размер текста бренда. */
+}
+
+/* AUTH */
+/* // Стили блока авторизации из HTML:
+   // <section id="authSection" class="auth-wrap"> ... */
+
+.auth-wrap {
+/* // Обёртка формы авторизации (центрирование на экране). */
+
+  min-height: calc(100vh - 56px);
+  /* // Высота: весь экран минус высота навбара (56px — типичный размер Bootstrap navbar). */
+
+  display: flex;
+  /* // Включаем flex для центрирования содержимого. */
+
+  align-items: center;
+  /* // Центр по вертикали. */
+
+  justify-content: center;
+  /* // Центр по горизонтали. */
+
+  padding: 80px 16px 24px;
+  /* // Отступы: сверху больше (чтобы не налезать на fixed navbar), по бокам и снизу. */
+}
+
+.auth-card {
+/* // Карточка логина:
+   // <div class="auth-card text-center"> */
+
+  max-width: 420px;
+  /* // Максимальная ширина карточки. */
+
+  width: 100%;
+  /* // На узких экранах занимает всю доступную ширину (до max-width). */
+
+  background: radial-gradient(circle at top, #020617, #020617);
+  /* // Фон карточки (радиальный, но фактически одинаковые цвета). */
+
+  border-radius: 20px;
+  /* // Скругление углов. */
+
+  padding: 22px 22px 24px;
+  /* // Внутренние отступы. */
+
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  /* // Рамка приглушённым цветом. */
+
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.85);
+  /* // Большая тень для “плавающей” карточки. */
+}
+
+.auth-logo {
+/* // Лого в авторизации:
+   // <img class="auth-logo" ...> */
+
+  height: 70px;
+  /* // Высота логотипа. */
+
+  border-radius: 16px;
+  /* // Скругление (если картинка квадратная — будет “плашка”). */
+
+  margin-bottom: 12px;
+  /* // Отступ снизу. */
+
+  box-shadow: 0 0 26px rgba(34, 197, 94, 0.9);
+  /* // Зелёное свечение вокруг логотипа (accent). */
+}
+
+.auth-title {
+/* // Заголовок SENTRAMIND в auth:
+   // <div class="auth-title"> */
+
+  font-size: 1.4rem;
+  /* // Размер текста. */
+
+  letter-spacing: 0.2em;
+  /* // Расстояние между буквами. */
+
+  text-indent: 0.2em;
+  /* // Сдвиг первой строки (чтобы визуально центрировать при большом letter-spacing). */
+
+  font-weight: 700;
+  /* // Жирный. */
+
+  margin-bottom: 6px;
+  /* // Отступ снизу. */
+}
+
+.auth-sub {
+/* // Подзаголовок (REALTIME RADAR...):
+   // <div class="auth-sub"> */
+
+  font-size: 0.85rem;
+  /* // Размер меньше. */
+
+  color: var(--sentra-text-muted);
+  /* // Приглушённый цвет текста. */
+
+  letter-spacing: 0.16em;
+  /* // Разрядка букв. */
+
+  text-transform: uppercase;
+  /* // Принудительно капсом (для латиницы). */
+
+  margin-bottom: 16px;
+  /* // Отступ вниз перед формой. */
+}
+
+.auth-toggle {
+/* // Нижний блок “нет аккаунта? регистрация”:
+   // <div class="auth-toggle mt-3"> */
+
+  font-size: 0.85rem;
+  /* // Мелкий текст. */
+
+  color: var(--sentra-text-muted);
+  /* // Приглушённый цвет. */
+}
+
+.auth-toggle button {
+/* // Кнопка в блоке переключения:
+   // <button id="authModeBtn" ...> */
+
+  border: none;
+  /* // Убираем стандартную рамку кнопки. */
+
+  background: none;
+  /* // Убираем стандартный фон. */
+
+  color: #22c55e;
+  /* // Делаем как “ссылка” акцентным зелёным. */
+
+  padding: 0 4px;
+  /* // Небольшие отступы, чтобы было удобно нажимать. */
+
+  text-decoration: underline;
+  /* // Подчёркивание (как ссылка). */
+}
+
+.form-control {
+/* // Это класс Bootstrap для инпутов:
+   // <input class="form-control" ...>
+   // Ты переопределяешь стандартный стиль Bootstrap под тёмную тему. */
+
+  background-color: #020617;
+  /* // Тёмный фон поля. */
+
+  border-color: #1e293b;
+  /* // Тёмная рамка. */
+
+  color: var(--sentra-text-main);
+  /* // Светлый текст внутри поля. */
+}
+
+.form-control:focus {
+/* // Состояние фокуса (когда нажал на инпут). */
+
+  background-color: #020617;
+  /* // Фон не меняется при фокусе. */
+
+  border-color: #22c55e;
+  /* // Рамка становится акцентной зелёной. */
+
+  color: var(--sentra-text-main);
+  /* // Цвет текста сохраняется. */
+
+  box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25);
+  /* // “Светящееся” кольцо вокруг (как Bootstrap, но зелёное). */
+}
+
+.btn-sentra {
+/* // Твоя кастом-кнопка:
+   // <button class="btn btn-sentra ..."> (в HTML это кнопка authSubmit) */
+
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  /* // Градиент зелёной кнопки. */
+
+  border: none;
+  /* // Без рамки. */
+
+  color: #020617;
+  /* // Тёмный текст на светлой кнопке. */
+
+  font-weight: 600;
+  /* // Полужирный. */
+
+  letter-spacing: 0.06em;
+  /* // Немного разрядка. */
+}
+
+.btn-sentra:hover {
+/* // Наведение мышкой на .btn-sentra. */
+
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  /* // Чуть темнее градиент при hover. */
+}
+
+.auth-error {
+/* // Ошибки авторизации:
+   // <div class="auth-error" id="authError"></div> */
+
+  font-size: 0.8rem;
+  /* // Мелкий текст ошибки. */
+
+  color: #f97373;
+  /* // Красный/розовый (ошибка). */
+
+  min-height: 1.2em;
+  /* // Держит высоту даже когда текста нет, чтобы форма не “прыгала”. */
+
+  margin-top: 4px;
+  /* // Отступ сверху от инпута/кнопки. */
+}
+
+/* MAIN */
+/* // Основной контент:
+   // <main id="mainPanel"> ... */
+
+main {
+/* // Стили применяются к тегу <main> на странице. */
+
+  padding-top: 76px;
+  /* // Отступ сверху, чтобы контент не залезал под fixed navbar. */
+
+  display: none;
+  /* // ВАЖНО: скрыто по умолчанию.
+     // radar.js после успешного логина делает display:block (или flex) и прячет authSection. */
+}
+
+.brand-hero {
+/* // Верхний “hero”-блок:
+   // <section class="brand-hero"> */
+
+  text-align: center;
+  /* // Центрирование текста. */
+
+  padding: 16px 16px 20px;
+  /* // Отступы со всех сторон. */
+}
+
+.brand-mark {
+/* // Лого в hero:
+   // <img class="brand-mark"> */
+
+  height: 72px;
+  /* // Размер лого. */
+
+  border-radius: 14px;
+  /* // Скругление. */
+
+  box-shadow: 0 0 26px rgba(34, 197, 94, 0.9);
+  /* // Зелёная подсветка. */
+}
+
+.brand-name {
+/* // Заголовок SENTRAMIND:
+   // <h1 class="brand-name"> */
+
+  margin-top: 14px;
+  /* // Отступ сверху после логотипа. */
+
+  font-size: 1.3rem;
+  /* // Размер заголовка. */
+
+  letter-spacing: 0.35em;
+  /* // Сильная разрядка. */
+
+  text-indent: 0.35em;
+  /* // Компенсация letter-spacing визуально. */
+
+  font-weight: 700;
+  /* // Жирный. */
+}
+
+.brand-tagline {
+/* // Подпись под заголовком:
+   // <p class="brand-tagline"> */
+
+  margin-top: 4px;
+  /* // Малый отступ. */
+
+  font-size: 0.8rem;
+  /* // Мелкий размер. */
+
+  letter-spacing: 0.28em;
+  /* // Разрядка. */
+
+  text-indent: 0.28em;
+  /* // Компенсация. */
+
+  text-transform: uppercase;
+  /* // Капсом (для латиницы). */
+
+  color: #4ade80;
+  /* // Светло-зелёный оттенок. */
+}
+
+.layout {
+/* // Сетка двух карточек:
+   // <div class="layout"> в HTML */
+
+  display: grid;
+  /* // CSS Grid. */
+
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.7fr);
+  /* // 2 колонки: левая шире (2fr), правая чуть уже (1.7fr).
+     // minmax(0, ...) предотвращает “выпирание” контента. */
+
+  gap: 20px;
+  /* // Расстояние между колонками/карточками. */
+}
+
+.sentra-card {
+/* // Общий стиль карточек:
+   // <div class="sentra-card"> (и радар, и управление) */
+
+  background: radial-gradient(circle at top, #020617, #000814);
+  /* // Фон карточки (тёмный градиент). */
+
+  border-radius: 20px;
+  /* // Скругление. */
+
+  padding: 18px 22px 22px;
+  /* // Внутренние отступы. */
+
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  /* // Рамка. */
+
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.95);
+  /* // Глубокая тень. */
+}
+
+.lzr-card-title {
+/* // Заголовок карточки:
+   // <div class="lzr-card-title"> */
+
+  font-size: 0.9rem;
+  /* // Размер. */
+
+  text-transform: uppercase;
+  /* // Капсом (для латиницы). */
+
+  letter-spacing: 0.18em;
+  /* // Разрядка. */
+
+  color: #94a3b8;
+  /* // Приглушённый серо-синий. */
+
+  margin-bottom: 10px;
+  /* // Отступ вниз от заголовка. */
+}
+
+.status-dot {
+/* // Точка статуса:
+   // <div id="statusDot" class="status-dot"></div> */
+
+  width: 10px;
+  /* // Размер точки. */
+
+  height: 10px;
+  /* // Размер точки. */
+
+  border-radius: 50%;
+  /* // Делаем круг. */
+
+  margin-left: 6px;
+  /* // Отступ слева (в RTL может смотреться как “между” точкой и текстом). */
+
+  background: #f97373;
+  /* // По умолчанию красная (offline/нет данных). */
+
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.7);
+  /* // Красное свечение. */
+
+  transition: background 0.3s, box-shadow 0.3s;
+  /* // Плавное изменение цвета/тени при смене статуса. */
+}
+
+.status-dot.online {
+/* // Когда JS добавляет класс online:
+   // statusDot.classList.add("online") */
+
+  background: #22c55e;
+  /* // Зелёная точка = онлайн/получаем данные. */
+
+  box-shadow: 0 0 12px rgba(34, 197, 94, 1);
+  /* // Более сильное зелёное свечение. */
+}
+
+.status-text {
+/* // Текст статуса:
+   // <div id="statusText" class="status-text">... */
+
+  font-size: 0.85rem;
+  /* // Мелкий текст. */
+
+  color: #9ca3af;
+  /* // Серый оттенок. */
+}
+
+/* RADAR */
+/* // Всё ниже относится к радару из HTML:
+   // .radar-wrap, #neoRadar.neo-radar, .grid-line..., .ring..., #neoSweep.sweep, #neoDot.target-dot, #neoDistance.radar-distance */
+
+.radar-wrap {
+/* // Центрирование круга радара внутри карточки. */
+
+  display: flex;
+  /* // Flex-контейнер. */
+
+  align-items: center;
+  /* // Центр по вертикали. */
+
+  justify-content: center;
+  /* // Центр по горизонтали. */
+
+  margin-top: 6px;
+  /* // Небольшой отступ сверху. */
+}
+
+.neo-radar {
+/* // Сам круг радара:
+   // <div class="neo-radar" id="neoRadar"> */
+
+  position: relative;
+  /* // Нужен, чтобы абсолютные элементы внутри (grid-line, ring, sweep, dot, label, distance) позиционировались относительно круга. */
+
+  width: 360px;
+  /* // Ширина круга. */
+
+  height: 360px;
+  /* // Высота круга. */
+
+  border-radius: 50%;
+  /* // Делает круг. */
+
+  background: radial-gradient(circle at center, #052e16 0%, #020617 65%, #000 100%);
+  /* // “Экран радара”: зелёный в центре, темнее к краям. */
+
+  border: 2px solid rgba(34, 197, 94, 0.6);
+  /* // Обводка зелёным. */
+
+  box-shadow: 0 0 32px rgba(34, 197, 94, 0.7), inset 0 0 40px rgba(15, 118, 110, 0.6);
+  /* // Внешнее свечение + внутреннее свечение (inset) для “глубины”. */
+
+  overflow: hidden;
+  /* // Всё, что выходит за круг, обрезается (важно для sweep/линий). */
+}
+
+.grid-line { position: absolute; background: rgba(34, 197, 94, 0.18); }
+/* // Общий стиль линий сетки.
+   // position:absolute — чтобы ставить их по % внутри круга.
+   // background — полупрозрачный зелёный. */
+
+.grid-line.h { height: 1px; width: 100%; left: 0; }
+/* // Горизонтальная линия: высота 1px, по ширине весь круг, слева 0. */
+
+.grid-line.v { width: 1px; height: 100%; top: 0; }
+/* // Вертикальная линия: ширина 1px, по высоте весь круг, сверху 0. */
+
+.grid-line.h1 { top: 25%; }
+/* // Первая горизонтальная линия на 25% высоты круга. */
+
+.grid-line.h2 { top: 50%; }
+/* // Вторая горизонтальная линия на 50%. */
+
+.grid-line.h3 { top: 75%; }
+/* // Третья горизонтальная линия на 75%. */
+
+.grid-line.v1 { left: 25%; }
+/* // Первая вертикальная линия на 25% ширины. */
+
+.grid-line.v2 { left: 50%; }
+/* // Вторая вертикальная линия на 50%. */
+
+.grid-line.v3 { left: 75%; }
+/* // Третья вертикальная линия на 75%. */
+
+.ring {
+/* // Общий стиль колец:
+   // <div class="ring r1/r2/r3"></div> */
+
+  position: absolute;
+  /* // Чтобы можно было задать размеры и top/left. */
+
+  border-radius: 50%;
+  /* // Кольца круглые. */
+
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  /* // Тонкая линия кольца. */
+
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.25);
+  /* // Лёгкое свечение. */
+}
+.r1 { width: 40%; height: 40%; top: 30%; left: 30%; }
+/* // Малое кольцо: 40% размера круга, центрируем top/left 30%. */
+
+.r2 { width: 70%; height: 70%; top: 15%; left: 15%; }
+/* // Среднее кольцо: 70%, центрируем 15%. */
+
+.r3 { width: 100%; height: 100%; top: 0; left: 0; }
+/* // Внешнее кольцо: на весь круг. */
+
+.sweep {
+/* // Луч сканирования:
+   // <div id="neoSweep" class="sweep"></div>
+   // JS меняет transform: rotate(...) чтобы “крутился”. */
+
+  position: absolute;
+  /* // Позиционируем внутри neo-radar. */
+
+  width: 52%;
+  /* // Длина луча: от центра до края (чуть больше половины диаметра). */
+
+  height: 2px;
+  /* // Толщина луча. */
+
+  left: 50%;
+  /* // Старт в центре по X. */
+
+  top: 50%;
+  /* // Старт в центре по Y. */
+
+  transform-origin: 0% 50%;
+  /* // Точка вращения: начало луча (в центре), по середине толщины. */
+
+  background: linear-gradient(90deg, rgba(22, 163, 74, 0), rgba(74, 222, 128, 0.95));
+  /* // Градиент: от прозрачного к яркому (чтобы край был ярче). */
+
+  box-shadow: 0 0 18px rgba(74, 222, 128, 0.95), 0 0 38px rgba(22, 163, 74, 0.9);
+  /* // Свечение луча. */
+
+  transition: transform 0.08s linear;
+  /* // Плавность изменения угла (JS обновляет transform часто). */
+}
+
+.target-dot {
+/* // Точка цели:
+   // <div id="neoDot" class="target-dot"></div>
+   // JS двигает её через left/top или transform и делает visible. */
+
+  position: absolute;
+  /* // Абсолют внутри радара. */
+
+  width: 8px;
+  /* // Размер точки. */
+
+  height: 8px;
+  /* // Размер точки. */
+
+  border-radius: 50%;
+  /* // Круг. */
+
+  background: #22c55e;
+  /* // Зелёная точка. */
+
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.95), 0 0 26px rgba(34, 197, 94, 0.9);
+  /* // Свечение. */
+
+  opacity: 0;
+  /* // По умолчанию скрыта (нет цели/нет данных). */
+
+  transition: opacity 0.15s;
+  /* // Плавное появление/исчезание. */
+}
+
+.target-dot.visible { opacity: 1; }
+/* // Когда JS добавит класс visible, точка станет видимой. */
+
+.radar-label {
+/* // Подпись сверху:
+   // <div class="radar-label">radar/distanceCm · currentAngle</div> */
+
+  position: absolute;
+  /* // Абсолютно в круге. */
+
+  top: 12px;
+  /* // Отступ от верхнего края круга. */
+
+  left: 50%;
+  /* // Центрирование по горизонтали. */
+
+  transform: translateX(-50%);
+  /* // Сдвигаем назад на половину ширины — идеально по центру. */
+
+  font-size: 11px;
+  /* // Маленький текст. */
+
+  letter-spacing: 0.16em;
+  /* // Разрядка. */
+
+  color: #bbf7d0;
+  /* // Светло-зелёный цвет. */
+
+  text-transform: uppercase;
+  /* // Капсом. */
+}
+
+.radar-distance {
+/* // Дистанция снизу:
+   // <div id="neoDistance" class="radar-distance"> --<small>ס״מ</small></div> */
+
+  position: absolute;
+  /* // Абсолют внутри круга. */
+
+  bottom: 16px;
+  /* // Прижимаем к низу с отступом. */
+
+  width: 100%;
+  /* // Чтобы текст центрировался по всей ширине круга. */
+
+  text-align: center;
+  /* // Центрируем. */
+
+  font-size: 24px;
+  /* // Большое число (см). */
+
+  font-weight: 600;
+  /* // Полужирное. */
+
+  color: #bbf7d0;
+  /* // Светло-зелёный. */
+
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.9), 0 0 24px rgba(22, 163, 74, 0.9);
+  /* // Свечение текста. */
+}
+
+.radar-distance small {
+/* // Тег <small> внутри .radar-distance (единицы “см”). */
+
+  font-size: 13px;
+  /* // Меньше чем число. */
+
+  color: #a7f3d0;
+  /* // Ещё более мягкий зелёный. */
+
+  font-weight: 400;
+  /* // Обычный вес. */
+
+  margin-right: 4px;
+  /* // Отступ справа (в RTL может ощущаться как “между” текстом и единицами). */
+}
+
+/* INFO */
+/* // Правая карточка “שליטה ונתונים”:
+   // .info-row, .info-label, .info-value относятся к блоку угла и т.п. */
+
+.info-row {
+/* // Ряд “подпись - значение”:
+   // <div class="info-row"> ... */
+
+  display: flex;
+  /* // Ставим label и value в одну линию. */
+
+  justify-content: space-between;
+  /* // Раздвигаем по краям. */
+
+  align-items: baseline;
+  /* // Выравнивание по базовой линии текста (чтобы цифры и текст смотрелись ровно). */
+
+  margin-bottom: 6px;
+  /* // Отступ снизу. */
+
+  padding-bottom: 6px;
+  /* // Отступ перед линией. */
+
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.35);
+  /* // Пунктирная линия-разделитель. */
+}
+
+.info-label { font-size: 0.9rem; color: #94a3b8; }
+/* // Лейбл (например “זווית צריח”): чуть меньше и muted-цвет. */
+
+.info-value { font-size: 1rem; font-weight: 500; color: #e5f4ff; }
+/* // Значение (например угол): чуть больше и ярче. */
+
+.info-value.mono {
+/* // Моноширинный стиль для цифр:
+   // <div id="servoAngle" class="info-value mono"> */
+
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* // Пытаемся использовать JetBrains Mono, если нет — системные monospace. */
+
+  font-size: 0.95rem;
+  /* // Чуть меньше, чтобы цифры выглядели аккуратно. */
+}
+
+@media (max-width: 780px) {
+/* // Адаптивность: когда ширина экрана <= 780px (телефон/планшет). */
+
+  .layout { grid-template-columns: 1fr; }
+  /* // Было 2 колонки — становится 1 колонка (карточки друг под другом). */
+
+  .neo-radar { width: 300px; height: 300px; }
+  /* // Радар уменьшается, чтобы влезал на мобильном. */
+}
